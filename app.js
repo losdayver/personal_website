@@ -11,9 +11,22 @@ app.set('views', path.join(__dirname, 'public', 'views'));
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    res.render('index', {
-        params: 'Hello World!'
-    });
+    res.redirect('/home');
+});
+
+app.get('/:route', (req, res) => {
+    if (req.params.route === 'home'){
+        res.render('index', {
+            nav_highlight: 'Home',
+            container_contents: 'homepage'
+        });
+    }        
+    else if (req.params.route === 'posts'){
+        res.render('index', {
+            nav_highlight: 'Posts',
+            container_contents: 'postspage'
+        });
+    }        
 });
 
 app.listen(port, () => {
