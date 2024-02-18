@@ -266,6 +266,8 @@ footer {
 
 .post-player {
     max-width: 300px;
+    min-width: 200px;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -278,6 +280,7 @@ footer {
 
 .post-player-cover {
     width: 100%;
+    height: auto;
     border-radius: 10px;
 }
 
@@ -288,6 +291,7 @@ footer {
 }
 
 .post-player-title {
+    width: 100%;
     margin: 0;
     margin-bottom: 10px;
 }
@@ -305,7 +309,6 @@ footer {
     padding: 10px;
     border-radius: 20px;
     cursor: pointer;
-    margin: 5px;
     transition: all 0.3s ease-in-out;
 }
 
@@ -314,7 +317,7 @@ footer {
   }
 
 .post-player-controls-buttons img {
-    width: 50px;
+    width: 30px;
     top: 50%;
     transform: translate(0, 5%);
     filter: invert(100%);
@@ -327,7 +330,7 @@ footer {
 }
 
 .post-player-slider {
-    width: 300px !important;;
+    width: 100% !important;;
     margin: 20px;
 }
 
