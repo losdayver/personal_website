@@ -1,2 +1,157 @@
 <section>
+    <div class="section-header">
+        <div class="section-header-time">
+            <h3>2024-02-14</h3>
+        </div>
+        <div class="section-header-title">
+            <h1>Thela Hun Ginjeet (Пока что Демо)</h1>
+        </div>
+        <div class="section-tags">
+            <h3>tags: </h3>
+            <p>#music</p>
+            <p>#cover</p>
+            <p>#art</p>
+        </div>
+    </div>
+    <hr />
+    <div class="section-contents">
+        <div class="post-contents">
+            
+            <div class="post-player">
+                <img class="post-player-cover" src="../media/posts/discipline.jpg" alt="discipline">
+                <div class="post-player-controls">
+                    <input class="post-player-slider" type="range" id="seek-bar"></input>
+                    <h3 class="post-player-title">Oleg Zhmelev - Thela Hun Ginjeet</h3>
+                    <p class="post-player-timestamp" id="timestamp"></p>
+                    <div class="post-player-controls-buttons">
+                        <button class="post-player-controls-buttons-back" id="skip-backward"><img src="../media/icons/skip-backward-btn.svg" alt="play"></button>
+                        <button class="post-player-controls-buttons-play" id="play-pause"><img src="../media/icons/play.svg" alt="play"></button>
+                        <button class="post-player-controls-buttons-forward" id="skip-forward"><img src="../media/icons/skip-forward-btn.svg" alt="play"></button>
+                    </div>
+                    <audio id="audio">
+                        <source src="../media/posts/thela_hun_ginjeet.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+            </div>
+            <div class="post-text">
+                <h2>Thela Hun Ginjeet</h2>
+                <hr>
+                <p>
+                    Эта песня - одна из немногих песен King Crimson,
+                    которую можно включить в клубе и все на танцполе
+                    смогут энергично танцевать в ритм.
+                </p>
+                <p>
+                    Все инструмены, кроме гитары Фриппа играют в 4/4.
+                    Фрипп же накладывает поверх всего этого свою механистичную
+                    партию в 7/4. Хотел бы так же заметить, что (по крайней мере я)
+                    слышу и привык слышать эту партию в размере 14/4, а не в 7/4.
+                    Вероятно просто моему мозгу комфортее воспринимать целое число в
+                    "числителе".
+                </p>
+                <p>
+                    Несмотря на такой диссонанс размеров партий, всё звучит
+                    достаточно складно. Оригинальная запись с альбома Discipline
+                    имеет очень особенный "хорусовый" звук. Гитары Фриппа и Белью
+                    хоть и играют на чистом звуке, из-за хоруса этот звук как будто
+                    расплывается между двумя гитарами и по-началу кажется, что
+                    играет один инструмент. У записи есть слегка "этническое"
+                    звучаение.
+                </p>
+                <p>
+                    Существует так же лайв с концертного альбома
+                    Absent Lover. Этот лайв я как раз-таки и взял за основу,
+                    а конкретно барабаны Бруфорда. Остальные инструменты я записал
+                    сам. Эта запись, по сравнению с альбомной имеет более ярко выраженное
+                    звучаение. Немного потерена "этничность", но я люблю воспринимать
+                    эту запись, как одну из версий песни, просто она в целом чуть другая,
+                    не лучше и не хуже.
+                </p>
+                <p>
+                    Начиная запись песни, я сначала хотел добавить вокал. Однако потом
+                    узнал, изначально в эту композицию King Crimson вообще не планировали
+                    добавлять вокальные партии (кроме монолого Белью), однако сам Белью
+                    настоял, что нужна какая-то партия, вокализ. Я же решил не добавлять вокал,
+                    а вместо этого вставить сцены с преступностью из американских фильмов
+                    70-80х годов. Также решил немного поэксперемнтировать с гитарными партиями:
+                    Добавил много овердабов и моих интерпретаций некоторых партий.
+                </p>
+            </div>
+        </div>
+    </div>
 </section>
+
+<script>
+    const audio = document.getElementById('audio');
+    const playPauseButton = document.getElementById('play-pause');
+    const skipBackwardButton = document.getElementById('skip-backward');
+    const skipForwardButton = document.getElementById('skip-forward');
+    const seekBar = document.getElementById('seek-bar');
+    const timestamp = document.getElementById('timestamp');
+
+    const players = document.getElementsByClassName('post-player');
+
+    setTimeout(() => {
+        Array.from(players);
+
+        for (let player of players) {
+            const audio = player.querySelector('audio');
+            const playPauseButton = player.querySelector('.post-player-controls-buttons-play');
+            const skipBackwardButton = player.querySelector('.post-player-controls-buttons-back');
+            const skipForwardButton = player.querySelector('.post-player-controls-buttons-forward');
+            const seekBar = player.querySelector('.post-player-slider');
+            const timestamp = player.querySelector('.post-player-timestamp');
+
+            function getTimestamp() {
+                function getFromSeconds(duration) {
+                    let minutes = Math.floor(duration / 60).toString().padStart(2, '0');
+                    let seconds = Math.floor(duration - minutes * 60).toString().padStart(2, '0');
+
+                return `${minutes}:${seconds}`;
+            }
+
+            return `${getFromSeconds(audio.duration * (seekBar.value / 100))} / ${
+                getFromSeconds(audio.duration)}`;
+            }   
+
+            timestamp.innerText = getTimestamp();
+
+            let isPlaying = false;
+
+            playPauseButton.addEventListener('click', function() {
+                if (isPlaying) {
+                    audio.pause();
+                    isPlaying = false;
+                } else {
+                    audio.play();
+                    isPlaying = true;
+                }
+            });
+
+            skipBackwardButton.addEventListener('click', function() {
+                audio.currentTime -= 10;
+            });
+
+            skipForwardButton.addEventListener('click', function() {
+                audio.currentTime += 10;
+            });
+
+            audio.addEventListener('timeupdate', function() {
+                    seekBar.value = audio.currentTime / audio.duration * 100;
+                    timestamp.innerText = getTimestamp();
+            });
+
+            seekBar.addEventListener('input', function() {
+                let seekBarValue = seekBar.value / 100;
+                
+                let audioDuration = audio.duration;
+
+                let time = audioDuration * seekBarValue;
+
+                audio.currentTime = time;
+
+                timestamp.innerText = getTimestamp();
+            });
+        }
+    }, 200);
+</script>
