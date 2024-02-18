@@ -54,6 +54,14 @@ nav ul li a {
     text-decoration: none;
 }
 
+nav ul li a:hover {
+    color: cornflowerblue;
+}
+
+.top-nav-selected {
+    color: cadetblue;
+}
+
 /* Section Styles */
 section {
     padding: 20px;
