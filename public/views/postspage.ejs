@@ -1,85 +1,46 @@
 <section>
-    <div class="section-header">
-        <div class="section-header-time">
-            <h3>2024-02-14</h3>
+    <h2>Поиск</h2>
+    <form action="#" method="get"> 
+        <div class="form-cluster">
+            <label for="substring"><p>Название включает:</p></label>
+            <input type="text" name="substring">    
+        </div class="form-cluster">
+        <div>
+            <label for="tags"><p>Теги (через пробел):</p></label>
+            <input type="text" name="tags">
         </div>
-        <div class="section-header-title">
-            <h1>Thela Hun Ginjeet (Пока что Демо)</h1>
-        </div>
-        <div class="section-tags">
-            <h3>tags: </h3>
-            <p>#music</p>
-            <p>#cover</p>
-            <p>#art</p>
-        </div>
-    </div>
-    <hr />
-    <div class="section-contents">
-        <div class="post-contents">
-            
-            <div class="post-player">
-                <img class="post-player-cover" src="../media/posts/discipline.jpg" alt="discipline">
-                <div class="post-player-controls">
-                    <input class="post-player-slider" type="range" value='0'></input>
-                    <h3 class="post-player-title">Oleg Zhmelev - Thela Hun Ginjeet</h3>
-                    <p class="post-player-timestamp" id="timestamp"></p>
-                    <div class="post-player-controls-buttons">
-                        <button class="post-player-controls-buttons-back" id="skip-backward"><img src="../media/icons/skip-backward-btn.svg" alt="play"></button>
-                        <button class="post-player-controls-buttons-play" id="play-pause"><img src="../media/icons/play.svg" alt="play"></button>
-                        <button class="post-player-controls-buttons-forward" id="skip-forward"><img src="../media/icons/skip-forward-btn.svg" alt="play"></button>
-                    </div>
-                    <audio id="audio">
-                        <source src="../media/posts/thela_hun_ginjeet.mp3" type="audio/mpeg">
-                    </audio>
+        <button type="submit">Поиск!</button> 
+    </form>
+</section>
+
+<% if (posts) {%>
+    <% for (post of posts) {%>
+        <section>
+            <div class="section-header">
+                <div class="section-header-time">
+                    <h3><%= post.datetime %></h3>
+                </div>
+                <div class="section-header-title">
+                    <h1><%= post.title %></h1>
+                </div>
+                <div class="section-tags">
+                    <h3>tags: </h3>
+                    <% for (let tag of post.tags) {%>
+                        <p>#<%= tag %></p>
+                    <% } %>
                 </div>
             </div>
-            <div class="post-text">
-                <h2>Thela Hun Ginjeet</h2>
-                <hr>
-                <p>
-                    Эта песня - одна из немногих песен King Crimson,
-                    которую можно включить в клубе и все на танцполе
-                    смогут энергично танцевать в ритм.
-                </p>
-                <p>
-                    Все инструмены, кроме гитары Фриппа играют в 4/4.
-                    Фрипп же накладывает поверх всего этого свою механистичную
-                    партию в 7/4. Хотел бы так же заметить, что (по крайней мере я)
-                    слышу и привык слышать эту партию в размере 14/4, а не в 7/4.
-                    Вероятно просто моему мозгу комфортее воспринимать целое число в
-                    "числителе".
-                </p>
-                <p>
-                    Несмотря на такой диссонанс размеров партий, всё звучит
-                    достаточно складно. Оригинальная запись с альбома Discipline
-                    имеет очень особенный "хорусовый" звук. Гитары Фриппа и Белью
-                    хоть и играют на чистом звуке, из-за хоруса этот звук как будто
-                    расплывается между двумя гитарами и по-началу кажется, что
-                    играет один инструмент. У записи есть слегка "этническое"
-                    звучаение.
-                </p>
-                <p>
-                    Существует так же лайв с концертного альбома
-                    Absent Lover. Этот лайв я как раз-таки и взял за основу,
-                    а конкретно барабаны Бруфорда. Остальные инструменты я записал
-                    сам. Эта запись, по сравнению с альбомной имеет более ярко выраженное
-                    звучаение. Немного потерена "этничность", но я люблю воспринимать
-                    эту запись, как одну из версий песни, просто она в целом чуть другая,
-                    не лучше и не хуже.
-                </p>
-                <p>
-                    Начиная запись песни, я сначала хотел добавить вокал. Однако потом
-                    узнал, изначально в эту композицию King Crimson вообще не планировали
-                    добавлять вокальные партии (кроме монолого Белью), однако сам Белью
-                    настоял, что нужна какая-то партия, вокализ. Я же решил не добавлять вокал,
-                    а вместо этого вставить сцены с преступностью из американских фильмов
-                    70-80х годов. Также решил немного поэксперемнтировать с гитарными партиями:
-                    Добавил много овердабов и моих интерпретаций некоторых партий.
-                </p>
+            <hr />
+            <div class="section-contents">
+                <div class="post-contents"> 
+                    <%- include(posts_path + post.pagename + '.ejs') -%>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
+    <% } %>
+<% } else {%>
+    <h1>Ничего не найдено(</h1>
+<% } %>
 
 <script>
     const audio = document.getElementById('audio');
@@ -107,11 +68,17 @@
                     let minutes = Math.floor(duration / 60).toString().padStart(2, '0');
                     let seconds = Math.floor(duration - minutes * 60).toString().padStart(2, '0');
 
-                return `${minutes}:${seconds}`;
-            }
+                    return `${minutes}:${seconds}`;
+                }   
 
-            return `${getFromSeconds(audio.duration * (seekBar.value / 100))} / ${
-                getFromSeconds(audio.duration)}`;
+                let duration = audio.duration;
+
+                if (!duration) {
+                    return '0:0 / ...';
+                }
+
+                return `${getFromSeconds(audio.duration * (seekBar.value / 100))} / ${
+                    getFromSeconds(audio.duration)}`;
             }   
 
             timestamp.innerText = getTimestamp();
