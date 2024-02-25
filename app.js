@@ -32,7 +32,7 @@ app.get('/posts', (req, res) => {
             let substring_check = true;
             let tags_check = false;
 
-            if (req.query.substring && !post.title.toLowerCase().includes(req.query.substring)) {
+            if (req.query.substring && !post.title.toLowerCase().includes(req.query.substring.toLowerCase())) {
                 substring_check = false;
             }
 
@@ -46,6 +46,7 @@ app.get('/posts', (req, res) => {
                     } 
                 }
             }
+            else { tags_check = true; }
 
             if (substring_check && tags_check) {
                 posts_sorted.push(post);

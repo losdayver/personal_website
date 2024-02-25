@@ -71,7 +71,7 @@ section {
     border-radius: 15px;
 }
 
-section {
+section:not(.section-find-posts) {
     animation: show 600ms 100ms cubic-bezier(0.38, 0.97, 0.56, 0.76) forwards;
   
     opacity: 0;
@@ -257,6 +257,33 @@ footer {
 }
 
 /* Posts */
+.form-cluster {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-cluster * {
+    max-width: 50%;
+}
+
+.form-cluster-submit-button {
+    padding: 10px;
+    background: cadetblue;
+    border-radius: 10px;
+    border: none;
+    margin: 10px 0px;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+}
+
+.form-cluster-input-text {
+    border-radius: 10px;
+    border: none;
+    height: 2rem;
+    font-size: 1rem;
+}
+
 .post-contents {
     display: flex;
     flex-wrap: wrap;
