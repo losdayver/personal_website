@@ -9,29 +9,31 @@
     <link rel="icon" type="image/x-icon" href="../media/favicon.jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
     <header>
         <h1>Oleg Zhmelev | Персональный портал</h1>
     </header>
-    
+
     <nav class="top-nav">
         <ul>
-            <li><a href="/home"
-                <% if (nav_highlight === 'Home') {%> 
-                class='top-nav-selected'
-                <% } %>
-            >Home</a></li>
-            
-            <li>|</li>
-            <li><a href="/posts"
-                <% if (nav_highlight === 'Posts') {%> 
-                class='top-nav-selected'
-                <% } %>
-            >Posts</a></li>
+            <li><a href="/home" <% if (nav_highlight==='Home' ) {%>
+                    class='top-nav-selected'
+                    <% } %>
+                        >Home
+                </a></li>
 
+            <li>|</li>
+            <li><a href="/posts" <% if (nav_highlight==='Posts' ) {%>
+                    class='top-nav-selected'
+                    <% } %>
+                        >Posts
+                </a></li>
+
+            <!--
             <li>|</li>
             <li><a href="/projects"
                 <% if (nav_highlight === 'Projects') {%> 
@@ -45,9 +47,10 @@
                 class='top-nav-selected'
                 <% } %>
             >Gallery</a></li>
+            -->
         </ul>
     </nav>
-   
+
     <div class="container">
         <%- include(container_contents) -%>
             <!--

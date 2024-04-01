@@ -1,15 +1,19 @@
 <section class="section-find-posts">
     <h2>Поиск</h2>
-    <form action="#" method="get"> 
+    <form action="#" method="get">
         <div class="form-cluster">
-            <label for="substring"><p>Название включает:</p></label>
-            <input type="text" name="substring" class="form-cluster-input-text">    
+            <label for="substring">
+                <p>Название включает:</p>
+            </label>
+            <input type="text" name="substring" class="form-cluster-input-text">
         </div>
         <div class="form-cluster">
-            <label for="tags"><p>Теги (через пробел):</p></label>
+            <label for="tags">
+                <p>Теги (через пробел):</p>
+            </label>
             <input type="text" name="tags" class="form-cluster-input-text">
         </div>
-        <button type="submit" class="form-cluster-submit-button">Поиск!</button> 
+        <button type="submit" class="form-cluster-submit-button">Поиск!</button>
     </form>
 </section>
 
@@ -18,107 +22,110 @@
         <section>
             <div class="section-header">
                 <div class="section-header-time">
-                    <h3><%= post.datetime %></h3>
+                    <h3>
+                        <%= post.datetime %>
+                    </h3>
                 </div>
                 <div class="section-header-title">
-                    <h1><%= post.title %></h1>
+                    <h1>
+                        <%= post.title %>
+                    </h1>
                 </div>
                 <div class="section-tags">
                     <h3>tags: </h3>
                     <% for (let tag of post.tags) {%>
-                        <p>#<%= tag %></p>
-                    <% } %>
+                        <a href="/posts?substring=&tags=<%= tag %>">#<%= tag %></a>
+                        <% } %>
                 </div>
             </div>
             <hr />
             <div class="section-contents">
-                <div class="post-contents"> 
-                    <%- include(posts_path + post.pagename + '.ejs') -%>
+                <div class="post-contents">
+                    <%- include(posts_path + post.pagename + '.ejs' ) -%>
                 </div>
             </div>
         </section>
-    <% } %>
-<% } else {%>
-    <h1>Ничего не найдено(</h1>
-<% } %>
+        <% } %>
+            <% } else {%>
+                <h1>Ничего не найдено(</h1>
+                <% } %>
 
-<script>
-    const audio = document.getElementById('audio');
-    const playPauseButton = document.getElementById('play-pause');
-    const skipBackwardButton = document.getElementById('skip-backward');
-    const skipForwardButton = document.getElementById('skip-forward');
-    const seekBar = document.getElementById('seek-bar');
-    const timestamp = document.getElementById('timestamp');
+                    <script>
+                        const audio = document.getElementById('audio');
+                        const playPauseButton = document.getElementById('play-pause');
+                        const skipBackwardButton = document.getElementById('skip-backward');
+                        const skipForwardButton = document.getElementById('skip-forward');
+                        const seekBar = document.getElementById('seek-bar');
+                        const timestamp = document.getElementById('timestamp');
 
-    const players = document.getElementsByClassName('post-player');
+                        const players = document.getElementsByClassName('post-player');
 
-    setTimeout(() => {
-        Array.from(players);
+                        setTimeout(() => {
+                            Array.from(players);
 
-        for (let player of players) {
-            const audio = player.querySelector('audio');
-            const playPauseButton = player.querySelector('.post-player-controls-buttons-play');
-            const skipBackwardButton = player.querySelector('.post-player-controls-buttons-back');
-            const skipForwardButton = player.querySelector('.post-player-controls-buttons-forward');
-            const seekBar = player.querySelector('.post-player-slider');
-            const timestamp = player.querySelector('.post-player-timestamp');
+                            for (let player of players) {
+                                const audio = player.querySelector('audio');
+                                const playPauseButton = player.querySelector('.post-player-controls-buttons-play');
+                                const skipBackwardButton = player.querySelector('.post-player-controls-buttons-back');
+                                const skipForwardButton = player.querySelector('.post-player-controls-buttons-forward');
+                                const seekBar = player.querySelector('.post-player-slider');
+                                const timestamp = player.querySelector('.post-player-timestamp');
 
-            function getTimestamp() {
-                function getFromSeconds(duration) {
-                    let minutes = Math.floor(duration / 60).toString().padStart(2, '0');
-                    let seconds = Math.floor(duration - minutes * 60).toString().padStart(2, '0');
+                                function getTimestamp() {
+                                    function getFromSeconds(duration) {
+                                        let minutes = Math.floor(duration / 60).toString().padStart(2, '0');
+                                        let seconds = Math.floor(duration - minutes * 60).toString().padStart(2, '0');
 
-                    return `${minutes}:${seconds}`;
-                }   
+                                        return `${minutes}:${seconds}`;
+                                    }
 
-                let duration = audio.duration;
+                                    let duration = audio.duration;
 
-                if (!duration) {
-                    return '0:0 / ...';
-                }
+                                    if (!duration) {
+                                        return '0:0 / ...';
+                                    }
 
-                return `${getFromSeconds(audio.duration * (seekBar.value / 100))} / ${
-                    getFromSeconds(audio.duration)}`;
-            }   
+                                    return `${getFromSeconds(audio.duration * (seekBar.value / 100))} / ${getFromSeconds(audio.duration)}`;
+                                }
 
-            timestamp.innerText = getTimestamp();
+                                timestamp.innerText = getTimestamp();
 
-            let isPlaying = false;
+                                let isPlaying = false;
 
-            playPauseButton.addEventListener('click', function() {
-                if (isPlaying) {
-                    audio.pause();
-                    isPlaying = false;
-                } else {
-                    audio.play();
-                    isPlaying = true;
-                }
-            });
+                                playPauseButton.addEventListener('click', function () {
+                                    if (isPlaying) {
+                                        audio.pause();
+                                        isPlaying = false;
+                                    } else {
+                                        audio.play();
+                                        isPlaying = true;
+                                    }
+                                });
 
-            skipBackwardButton.addEventListener('click', function() {
-                audio.currentTime -= 10;
-            });
+                                skipBackwardButton.addEventListener('click', function () {
+                                    audio.currentTime -= 10;
+                                });
 
-            skipForwardButton.addEventListener('click', function() {
-                audio.currentTime += 10;
-            });
+                                skipForwardButton.addEventListener('click', function () {
+                                    audio.currentTime += 10;
+                                });
 
-            audio.addEventListener('timeupdate', function() {
-                    seekBar.value = audio.currentTime / audio.duration * 100;
-                    timestamp.innerText = getTimestamp();
-            });
+                                audio.addEventListener('timeupdate', function () {
+                                    seekBar.value = audio.currentTime / audio.duration * 100;
+                                    timestamp.innerText = getTimestamp();
+                                });
 
-            seekBar.addEventListener('input', function() {
-                let seekBarValue = seekBar.value / 100;
-                
-                let audioDuration = audio.duration;
+                                seekBar.addEventListener('input', function () {
+                                    let seekBarValue = seekBar.value / 100;
 
-                let time = audioDuration * seekBarValue;
+                                    let audioDuration = audio.duration;
 
-                audio.currentTime = time;
+                                    let time = audioDuration * seekBarValue;
 
-                timestamp.innerText = getTimestamp();
-            });
-        }
-    }, 200);
-</script>
+                                    audio.currentTime = time;
+
+                                    timestamp.innerText = getTimestamp();
+                                });
+                            }
+                        }, 200);
+                    </script>
