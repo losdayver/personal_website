@@ -30,7 +30,7 @@ const buildPlayers = () => {
       };
       const duration = audio.duration ?? 0;
       return `${getFromSeconds(
-        duration * (seekBar.value ?? 0 / 100)
+        duration * ((seekBar.value ?? 0) / 100)
       )} / ${getFromSeconds(duration)}`;
     };
     timestamp.innerText = getTimestamp();
