@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "ES2022",
+    "outDir": "./../public/scripts",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": ["src"]
+}
