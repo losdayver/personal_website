@@ -1,2 +1,6 @@
+cd client
 tsc
-node server/dist/index.js
+cd ..
+cd server
+tsc
+node dist/index.js
