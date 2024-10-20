@@ -3,14 +3,18 @@ import * as path from "path";
 import { readFile } from "fs/promises";
 import { config } from "./config/app.config";
 import { IPostDescriptor } from "./types";
+import { makeCall } from "./api/remote/remote";
 
 let app = express();
+
+app.use(express.json());
 app.use(express.static("../public"));
 app.set("view engine", "ejs");
 app.set("views", "../public/views");
 app.set("styles", "../public/styles");
 app.set("scripts", "../public/scripts");
 app.set("media", "../public/media");
+
 app.get("/", (_, res) => {
   res.redirect("/home");
 });
@@ -55,15 +59,24 @@ app.get("/posts", async (req, res) => {
     nav_highlight: "Posts",
     container_contents: "postspage",
     posts: posts_sorted,
-    posts_path: posts_path,
+    posts_path: posts_path
   });
+});
+
+app.get("/remote_testing", (_, res) => {
+  res.render("testing/remote");
 });
 
 app.get("/home", (_, res) => {
   res.render("index", {
     nav_highlight: "Home",
-    container_contents: "homepage",
+    container_contents: "homepage"
   });
+});
+
+app.post("/api/remote", async (req, res) => {
+  const response = await makeCall(req.body);
+  res.send(JSON.stringify(response));
 });
 
 app.listen(config.port, () => {

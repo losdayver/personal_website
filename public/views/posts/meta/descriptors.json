@@ -1,22 +1,28 @@
 {
-    "posts": [
-        {
-            "title": "Last Caress",
-            "datetime": "2024-04-01",
-            "tags": ["music", "art", "cover"],
-            "pagename": "last_caress"
-        },
-        {
-            "title": "Thela Hun Ginjeet",
-            "datetime": "2024-03-08",
-            "tags": ["music", "art", "cover"],
-            "pagename": "thela_hun_ginjeet"
-        },
-        {
-            "title": "Minecraft b1.7.3 server",
-            "datetime": "2024-02-24",
-            "tags": ["game", "it"],
-            "pagename": "minecraft_beta_server"
-        }
-    ]
+  "posts": [
+    {
+      "title": "Миграция сайта на typescript",
+      "datetime": "2024-10-17",
+      "tags": ["it", "site"],
+      "pagename": "ts_migration"
+    },
+    {
+      "title": "Last Caress",
+      "datetime": "2024-04-01",
+      "tags": ["music", "art", "cover"],
+      "pagename": "last_caress"
+    },
+    {
+      "title": "Thela Hun Ginjeet",
+      "datetime": "2024-03-08",
+      "tags": ["music", "art", "cover"],
+      "pagename": "thela_hun_ginjeet"
+    },
+    {
+      "title": "Minecraft b1.7.3 server",
+      "datetime": "2024-02-24",
+      "tags": ["game", "it"],
+      "pagename": "minecraft_beta_server"
+    }
+  ]
 }

@@ -4,7 +4,8 @@
     "module": "ES2020",
     "outDir": "./../public/scripts",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "strictNullChecks": false
   },
   "include": ["src"]
 }
