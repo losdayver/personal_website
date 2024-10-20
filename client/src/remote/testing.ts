@@ -8,11 +8,11 @@ window.addEventListener("load", async () => {
   remote.b = 14;
 
   // @ts-ignore
-  remote.func = function (a, b, c) {
-    return a + b + c;
+  remote.func = function (arg) {
+    return arg + this.b + this.a;
   };
 
-  console.log(await (await remote.func)(10, 10, 10));
+  console.log(await (await remote.func)(100));
 
   const valueInput = document.querySelector("#value") as HTMLInputElement;
   const propInput = document.querySelector("#prop") as HTMLInputElement;

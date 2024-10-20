@@ -29,9 +29,6 @@ export const makeCall = async (
       else if (remoteCall.callObj?.flags?.isFunction) {
         const funcStr = remoteCall.callObj.value;
         newValue = async (args: any[]) => {
-          console.log(
-            `((${funcStr}).bind(obj))(${args.length ? args.join(",") : ""})`
-          );
           return await eval(
             `((${funcStr}).bind(obj))(${args.length ? args.join(",") : ""})`
           );
