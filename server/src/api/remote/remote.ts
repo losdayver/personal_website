@@ -4,6 +4,7 @@ import {
   RemoteObjectCall,
   RemoteObjectResponse
 } from "../../../../client/src/remote/meta";
+import { executeMethod } from "./context";
 
 const objectMap = new Map<ObjectIdentifier, any>();
 
@@ -28,11 +29,7 @@ export const makeCall = async (
         newValue = remoteCall.callObj.value;
       else if (remoteCall.callObj?.flags?.isFunction) {
         const funcStr = remoteCall.callObj.value;
-        newValue = async (args: any[]) => {
-          return await eval(
-            `((${funcStr}).bind(obj))(${args.length ? args.join(",") : ""})`
-          );
-        };
+        newValue = () => funcStr;
       } else {
         try {
           newValue = JSON.parse(remoteCall.callObj.value);
@@ -44,8 +41,10 @@ export const makeCall = async (
     }
   } else if (remoteCall.method == "invokeMethod") {
     const obj = objectMap.get(remoteCall.callObj.objectID);
-    const value = await obj[remoteCall.callObj.prop](
-      remoteCall?.callObj?.value as any[]
+    const value = await executeMethod(
+      obj[remoteCall.callObj.prop](),
+      remoteCall?.callObj?.value as any[],
+      obj
     );
     return { value };
   } else if (remoteCall.method == "exists") {
