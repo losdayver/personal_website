@@ -5,48 +5,42 @@
       <label for="substring">
         <p>Название включает:</p>
       </label>
-      <input type="text" name="substring" class="form-cluster-input-text">
+      <input type="text" name="substring" class="form-cluster-input-text" />
     </div>
     <div class="form-cluster">
       <label for="tags">
         <p>Теги (через пробел):</p>
       </label>
-      <input type="text" name="tags" class="form-cluster-input-text">
+      <input type="text" name="tags" class="form-cluster-input-text" />
     </div>
     <button type="submit" class="form-cluster-submit-button">Поиск!</button>
   </form>
 </section>
 
-<% if (posts) {%>
-  <% for (post of posts) {%>
-    <section>
-      <div class="section-header">
-        <div class="section-header-time">
-          <h3>
-            <%= post.datetime %>
-          </h3>
-        </div>
-        <div class="section-header-title">
-          <h1>
-            <%= post.title %>
-          </h1>
-        </div>
-        <div class="section-tags">
-          <h3>tags: </h3>
-          <% for (let tag of post.tags) {%>
-            <a href="/posts?substring=&tags=<%= tag %>">#<%= tag %></a>
-            <% } %>
-        </div>
-      </div>
-      <hr />
-      <div class="section-contents">
-        <div class="post-contents">
-          <%- include(posts_path + post.pagename + '.ejs' ) -%>
-        </div>
-      </div>
-    </section>
-    <% } %>
-      <% } else {%>
-        <h1>Ничего не найдено(</h1>
-        <% } %>
-          <script src="scripts/player/player.js" type="module"></script>
+<% if (posts) {%> <% for (post of posts) {%>
+<section>
+  <div class="section-header">
+    <div class="section-header-time">
+      <h3><%= post.datetime %></h3>
+    </div>
+    <div class="section-header-title">
+      <h1><%= post.title %></h1>
+    </div>
+    <div class="section-tags">
+      <h3>tags:</h3>
+      <% for (let tag of post.tags) {%>
+      <a href="/posts?substring=&tags=<%= tag %>">#<%= tag %></a>
+      <% } %>
+    </div>
+  </div>
+  <hr />
+  <div class="section-contents">
+    <div class="post-contents">
+      <%- include(posts_path + post.pagename + '.ejs' ) -%>
+    </div>
+  </div>
+</section>
+<% } %> <% } else {%>
+<h1>Ничего не найдено(</h1>
+<% } %>
+<script src="scripts/player/player.js" type="module"></script>

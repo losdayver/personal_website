@@ -11,6 +11,7 @@ const buildPlayers = () => {
     ) as HTMLElement;
     const skipForwardButton = player.querySelector(
       ".post-player-controls-buttons-forward"
+
     ) as HTMLElement;
     const seekBar = player.querySelector(
       ".post-player-slider"

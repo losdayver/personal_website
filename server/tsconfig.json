@@ -4,7 +4,8 @@
     "module": "CommonJS",
     "outDir": "dist",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "strictNullChecks": false
   },
-  "include": ["src"]
+  "include": ["src", "../client/src/remote/meta.ts"]
 }
