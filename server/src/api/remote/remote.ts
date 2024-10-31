@@ -3,7 +3,7 @@ import {
   ObjectIdentifier,
   RemoteObjectCall,
   RemoteObjectResponse
-} from "../../../../client/src/remote/meta";
+} from "../../../../types/remote";
 import { executeMethod } from "./context";
 
 const objectMap = new Map<ObjectIdentifier, any>();

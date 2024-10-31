@@ -5,7 +5,10 @@
     "outDir": "./../public/scripts",
     "strict": true,
     "esModuleInterop": true,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "typeRoots": ["./node_modules/@types", "../types"],
+    "baseUrl": ".",
+    "importsNotUsedAsValues": "remove"
   },
   "include": ["src"]
 }

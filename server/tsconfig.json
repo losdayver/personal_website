@@ -7,5 +7,5 @@
     "esModuleInterop": true,
     "strictNullChecks": false
   },
-  "include": ["src", "../client/src/remote/meta.ts"]
+  "include": ["src"]
 }

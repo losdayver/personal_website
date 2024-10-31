@@ -9,6 +9,10 @@ let app = express();
 
 app.use(express.json());
 app.use(express.static("../public"));
+
+app.use("/public", express.static(__dirname + "/public"));
+app.use("/modules", express.static(__dirname + "/../../client/node_modules"));
+
 app.set("view engine", "ejs");
 app.set("views", "../public/views");
 app.set("styles", "../public/styles");

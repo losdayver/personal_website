@@ -1,4 +1,8 @@
-import { Call, RemoteMethod, RemoteObjectResponse } from "./meta";
+import {
+  Call,
+  RemoteMethod,
+  RemoteObjectResponse
+} from "../../../types/remote/index";
 
 export const remoteUrl = "/api/remote";
 

@@ -1,4 +1,4 @@
-import { assertRemote, newRemote } from "./remote.js";
+import { assertRemote, newRemote } from "remote";
 
 export const runTest = async () => {
   const rm = await newRemote();

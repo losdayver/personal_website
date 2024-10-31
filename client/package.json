@@ -11,6 +11,10 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/jquery": "^3.5.32",
     "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "jquery": "^3.7.1"
   }
 }
