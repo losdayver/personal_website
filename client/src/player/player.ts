@@ -3,6 +3,7 @@ import { iconsPath } from "../routes.js";
 const placeholders = document.getElementsByClassName("post-player");
 
 let nowPlayingPlayPauseButton: JQuery<HTMLButtonElement> = null;
+let nowPlaying = false;
 
 const initPlayers = () => {
   for (let p of placeholders) {
@@ -68,15 +69,18 @@ const initPlayers = () => {
       playPauseButton[0].addEventListener("click", function () {
         if (isPlaying) {
           audio[0].pause();
+          nowPlaying = false;
           $(playPauseButton.children()[0]).attr("src", `${iconsPath}play.svg`);
         } else {
           if (
             nowPlayingPlayPauseButton &&
+            nowPlaying &&
             nowPlayingPlayPauseButton != playPauseButton
           )
             nowPlayingPlayPauseButton.click();
           nowPlayingPlayPauseButton = playPauseButton;
           audio[0].play();
+          nowPlaying = true;
           $(playPauseButton.children()[0]).attr("src", `${iconsPath}pause.svg`);
         }
         isPlaying = !isPlaying;
