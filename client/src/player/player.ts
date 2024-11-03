@@ -10,15 +10,18 @@ const initPlayers = () => {
   }
 };
 
+window.addEventListener("load", initPlayers);
+
 class MusicPlayer {
   static lastActivePlayer: MusicPlayer = null;
+  static playersList: MusicPlayer[] = [];
   isPlaying = false;
 
   songName: string;
   audioPath: string;
   thumbnailPath: string;
 
-  postPlayer: HTMLDivElement;
+  musicPlayer: HTMLDivElement;
   seekBar: HTMLProgressElement;
   playPauseButton: HTMLButtonElement;
   skipForwardButton: HTMLButtonElement;
@@ -41,7 +44,7 @@ class MusicPlayer {
     this.audio.pause();
     $($(this.playPauseButton).children()[0]).attr(
       "src",
-      `${iconsPath}play.svg`
+      `${iconsPath}play-fill.svg`
     );
     MusicPlayer.lastActivePlayer = this;
     this.isPlaying = false;
@@ -68,19 +71,46 @@ class MusicPlayer {
     )} / ${getFromSeconds(duration)}`;
   };
 
+  setTime = (percents: number) => {
+    this.audio.currentTime = (this.audio.duration * percents) / 100;
+    this.timestamp.innerText = this.getTimestamp();
+    this.seekBar.value = percents;
+  };
+
+  skip = (direction: "forwards" | "backwards") => {
+    let currentId = MusicPlayer.playersList.indexOf(this);
+
+    if (direction == "forwards") currentId++;
+    else currentId--;
+
+    const nextPlayer =
+      MusicPlayer.playersList[
+        Math.abs(currentId) % MusicPlayer.playersList.length
+      ];
+    nextPlayer.setTime(0);
+    nextPlayer.play();
+    this.scrollTo(nextPlayer.musicPlayer);
+  };
+
+  scrollTo = (element: HTMLElement) => {
+    const y = element.getBoundingClientRect().top + window.scrollY;
+    window.scroll({
+      top: y,
+      behavior: "smooth"
+    });
+  };
+
   initLogic = () => {
     this.timestamp.innerText = this.getTimestamp();
 
     this.playPauseButton.addEventListener("click", this.toggle);
 
-    this.skipBackwardButton.addEventListener(
-      "click",
-      () => (this.audio.currentTime -= 10)
+    this.skipBackwardButton.addEventListener("click", () =>
+      this.skip("backwards")
     );
 
-    this.skipForwardButton.addEventListener(
-      "click",
-      () => (this.audio.currentTime += 10)
+    this.skipForwardButton.addEventListener("click", () =>
+      this.skip("forwards")
     );
 
     this.audio.addEventListener("timeupdate", () => {
@@ -92,9 +122,16 @@ class MusicPlayer {
       this.audio.currentTime = (this.audio.duration * this.seekBar.value) / 100;
       this.timestamp.innerText = this.getTimestamp();
     });
+
+    this.audio.addEventListener("ended", () => {
+      this.setTime(0);
+      this.skip("forwards");
+    });
   };
 
   constructor(playerPlaceholder: HTMLDivElement) {
+    MusicPlayer.playersList.push(this);
+
     // getting div attributes
     this.songName = playerPlaceholder.getAttribute("songName");
     this.audioPath = playerPlaceholder.getAttribute("audioPath");
@@ -119,15 +156,15 @@ class MusicPlayer {
     controlsDiv.append(timestamp);
     const buttonsDiv = $('<div class="music-player-controls-buttons"></div>');
     const skipBackwardButton = $<HTMLButtonElement>(
-      `<button class="music-player-controls-buttons-back"><img src="${iconsPath}skip-backward-btn.svg" alt="backward"></button>`
+      `<button class="music-player-controls-buttons-back"><img src="${iconsPath}skip-start-fill.svg" alt="backward"></button>`
     );
     buttonsDiv.append(skipBackwardButton);
     const playPauseButton = $<HTMLButtonElement>(
-      `<button class="music-player-controls-buttons-play"><img src="${iconsPath}play.svg" alt="play"></button>`
+      `<button class="music-player-controls-buttons-play"><img src="${iconsPath}play-fill.svg" alt="play"></button>`
     );
     buttonsDiv.append(playPauseButton);
     const skipForwardButton = $<HTMLButtonElement>(
-      `<button class="music-player-controls-buttons-forward"><img src="${iconsPath}skip-forward-btn.svg" alt="forward"></button>`
+      `<button class="music-player-controls-buttons-forward"><img src="${iconsPath}skip-end-fill.svg" alt="forward"></button>`
     );
     buttonsDiv.append(skipForwardButton);
     controlsDiv.append(buttonsDiv);
@@ -137,7 +174,7 @@ class MusicPlayer {
     controlsDiv.append(audio);
     postPlayer.append(controlsDiv);
 
-    this.postPlayer = postPlayer[0];
+    this.musicPlayer = postPlayer[0];
     this.seekBar = seekBar[0];
     this.playPauseButton = playPauseButton[0];
     this.skipForwardButton = skipForwardButton[0];
@@ -148,5 +185,3 @@ class MusicPlayer {
     audio[0].addEventListener("canplay", this.initLogic);
   }
 }
-
-window.addEventListener("load", initPlayers);

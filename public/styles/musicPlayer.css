@@ -12,6 +12,7 @@
   margin: 20px;
 }
 
+/* thumbnail */
 .music-player-cover {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -19,6 +20,7 @@
   border-radius: 10px;
 }
 
+/* controls */
 .music-player-controls {
   display: flex;
   flex-direction: column;
@@ -38,20 +40,23 @@
 }
 
 .music-player-controls-buttons {
-  margin: 10px 0;
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
 }
 
 .music-player-controls-buttons > button {
-  background: none;
+  background-color: #555;
+  border: none;
   padding: 10px;
-  border-radius: 20px;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  border: white solid 2px;
+  transition: all 0.1s ease-in-out;
 }
 
-.music-player-controls-buttons > button:active {
-  transform: scale(0.8);
+.music-player-controls-buttons > button:hover,
+button:active {
+  transform: scale(0.9);
+  background-color: #777;
 }
 
 .music-player-controls-buttons img {
@@ -61,14 +66,8 @@
   filter: invert(100%);
 }
 
-.music-player-controls-buttons-back:hover,
-.music-player-controls-buttons-forward:hover,
-.music-player-controls-buttons-play:hover {
-  background-color: #555;
-}
-
 .music-player-slider {
-  width: 100% !important;
+  width: 300px !important;
   margin: 20px;
 }
 
@@ -78,12 +77,7 @@ input[type="range"] {
   appearance: none;
   background: transparent;
   cursor: pointer;
-  width: 25rem;
-}
-
-/* Removes default focus */
-input[type="range"]:focus {
-  outline: none;
+  height: 50% !important;
 }
 
 /******** Chrome, Safari, Opera and Edge Chromium styles ********/
@@ -105,11 +99,6 @@ input[type="range"]::-webkit-slider-thumb {
   width: 1rem;
 }
 
-input[type="range"]:focus::-webkit-slider-thumb {
-  outline: 3px solid #333;
-  outline-offset: 0.125rem;
-}
-
 /*********** Firefox styles ***********/
 /* slider track */
 input[type="range"]::-moz-range-track {
@@ -125,9 +114,4 @@ input[type="range"]::-moz-range-thumb {
   border-radius: 0.5rem;
   height: 1rem;
   width: 1rem;
-}
-
-input[type="range"]:focus::-moz-range-thumb {
-  outline: 8px solid #252525;
-  outline-offset: 0.25rem;
 }
