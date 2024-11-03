@@ -62,6 +62,6 @@ app.post("/api/remote", async (req, res) => {
   res.send(JSON.stringify(response));
 });
 
-app.listen(config.port, () => {
+app.listen(config.port, "0.0.0.0", () => {
   console.log(`Listening on port ${config.port}!`);
 });

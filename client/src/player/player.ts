@@ -182,6 +182,16 @@ class MusicPlayer {
     this.audio = audio[0];
     this.timestamp = timestamp[0];
 
-    audio[0].addEventListener("canplay", this.initLogic);
+    // checking if the audio loaded
+    let retries = 10;
+    const interval = window.setInterval(() => {
+      if (this.audio.duration) {
+        this.initLogic();
+        window.clearInterval(interval);
+      } else if (retries <= 0) {
+        console.log("audio can not be loaded");
+      }
+      retries -= 1;
+    }, 100);
   }
 }

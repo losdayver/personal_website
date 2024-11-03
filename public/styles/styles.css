@@ -1,3 +1,7 @@
+html {
+  background-color: rgb(48, 55, 57);
+}
+
 /* Body Styles */
 body {
   font-family: Mulish, Helvetica, sans-serif, sans-serif;
@@ -5,22 +9,21 @@ body {
   padding: 0;
   background: linear-gradient(
     30deg,
-    rgba(20, 120, 10, 0.49341743533350846) 60%,
+    rgba(10, 120, 89, 0.493) 30%,
     rgba(0, 212, 255, 1) 100%
   );
-  overscroll-behavior: none;
 }
 
 /* Container Styles */
 .container {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 10px;
 }
 
 /* Header Styles */
 header {
-  background-color: #333333df;
+  background-color: rgb(48, 55, 57);
   color: #fff;
   padding-left: 20px;
   padding-top: 30px;
@@ -63,11 +66,25 @@ nav ul li a:hover {
 
 /* Section Styles */
 section {
+  font-size: 0.8rem;
   padding: 20px;
   background-color: #fff;
   margin-top: 10px;
   margin-bottom: 20px;
   border-radius: 15px;
+}
+
+@media (max-width: 700px) {
+  section {
+    font-size: 0.9rem;
+    border-radius: 0;
+  }
+
+  .container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px 0;
+  }
 }
 
 section:not(.section-find-posts) {
@@ -102,6 +119,7 @@ section a:hover {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  gap: 0.3em;
 }
 
 .section-tags h3,
@@ -111,7 +129,7 @@ a {
 
 .section-tags a {
   height: 20px;
-  padding: 5px;
+  padding: 0.3em;
   background: cadetblue;
   border-radius: 10px;
   cursor: pointer;
@@ -119,7 +137,7 @@ a {
 
 /* Footer Styles */
 footer {
-  background-color: #333;
+  background-color: rgb(48, 55, 57);
   color: #fff;
   padding: 10px 20px;
   text-align: center;
@@ -309,7 +327,7 @@ footer {
   flex: 1;
   text-align: left;
   min-width: 300px;
-  margin: 20px;
+  margin: 5px;
 }
 
 .post-text p {
@@ -329,6 +347,23 @@ footer {
   flex-wrap: wrap;
   align-items: center;
   justify-items: center;
+  padding: 1em;
+  border-radius: 10px;
+  background-color: rgb(45, 72, 78, 0.5);
+}
+
+.section-header * {
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  .section-header {
+    font-size: 0.8em;
+    flex-direction: column;
+  }
+  .section-header * {
+    margin: 0.3em 0;
+  }
 }
 
 /* Pagination */
@@ -363,8 +398,8 @@ nav,
 .cv-block-skill-progressbar,
 input,
 button,
-.post-player {
-  filter: drop-shadow(5px 5px 5px #00000069);
+.music-player {
+  filter: drop-shadow(2px 2px 2px #00000069);
 }
 
 /* Night Mode */
