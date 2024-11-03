@@ -15,6 +15,7 @@ window.addEventListener("load", initPlayers);
 class MusicPlayer {
   static lastActivePlayer: MusicPlayer = null;
   static playersList: MusicPlayer[] = [];
+  static loopAll = false;
   isPlaying = false;
 
   songName: string;
@@ -83,10 +84,10 @@ class MusicPlayer {
     if (direction == "forwards") currentId++;
     else currentId--;
 
+    if (currentId < 0) currentId = MusicPlayer.playersList.length - 1;
+
     const nextPlayer =
-      MusicPlayer.playersList[
-        Math.abs(currentId) % MusicPlayer.playersList.length
-      ];
+      MusicPlayer.playersList[currentId % MusicPlayer.playersList.length];
     nextPlayer.setTime(0);
     nextPlayer.play();
     this.scrollTo(nextPlayer.musicPlayer);
@@ -125,7 +126,8 @@ class MusicPlayer {
 
     this.audio.addEventListener("ended", () => {
       this.setTime(0);
-      this.skip("forwards");
+      this.pause();
+      if (MusicPlayer.loopAll) this.skip("forwards");
     });
   };
 
