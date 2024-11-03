@@ -1,71 +1,50 @@
 import express from "express";
-import * as path from "path";
-import { readFile } from "fs/promises";
 import { config } from "./config/app.config";
-import { IPostDescriptor } from "./types";
 import { makeCall } from "./api/remote/remote";
+import {
+  clientModulesRoute,
+  publicDir,
+  viewsDir,
+  mediaDir,
+  mediaRoute,
+  scriptsRoute,
+  scriptsDir,
+  stylesDir,
+  stylesRoute,
+  viewsRoute,
+  clientModulesDir,
+  postsDir
+} from "./routes";
+import { PostManager } from "./postManager/postManager";
+import { EjsRenderMeta, EjsRenderPostPageMeta } from "./types";
 
-let app = express();
-
-app.use(express.json());
-app.use(express.static("../public"));
-
-app.use("/public", express.static(__dirname + "/public"));
-app.use("/modules", express.static(__dirname + "/../../client/node_modules"));
+const app = express();
 
 app.set("view engine", "ejs");
-app.set("views", "../public/views");
-app.set("styles", "../public/styles");
-app.set("scripts", "../public/scripts");
-app.set("media", "../public/media");
+app.use(express.json());
+app.use(express.static(publicDir));
+app.use(clientModulesRoute, express.static(clientModulesDir));
+
+app.set(viewsRoute, viewsDir);
+app.set(stylesRoute, stylesDir);
+app.set(scriptsRoute, scriptsDir);
+app.set(mediaRoute, mediaDir);
 
 app.get("/", (_, res) => {
   res.redirect("/home");
 });
-app.get("/posts", async (req, res) => {
-  const posts_descriptors_path = "../public/views/posts/meta/descriptors.json";
-  const posts_path = "posts/";
-  const rawdata = (await readFile(posts_descriptors_path)).toString();
-  let posts: IPostDescriptor[] = JSON.parse(rawdata).posts;
-  let posts_sorted = [];
 
-  if (req.query.substring || req.query.tags) {
-    for (const post of posts) {
-      let substring_check = true;
-      let tags_check = false;
-      if (
-        req.query.substring &&
-        !post.title
-          .toLowerCase()
-          .includes((req.query.substring as string).toLowerCase()) // todo add REAL search
-      ) {
-        substring_check = false;
-      }
-      if (req.query.tags) {
-        const tags = (req.query.tags as string).split(" ");
-        for (let tag of tags) {
-          if (post.tags.includes(tag)) {
-            tags_check = true;
-            break;
-          }
-        }
-      } else {
-        tags_check = true;
-      }
-      if (substring_check && tags_check) {
-        posts_sorted.push(post);
-      }
-    }
-  } else {
-    posts_sorted = posts;
-  }
+const postManager = new PostManager();
+postManager.init();
+
+app.get("/posts", async (_, res) =>
   res.render("index", {
-    nav_highlight: "Posts",
-    container_contents: "postspage",
-    posts: posts_sorted,
-    posts_path: posts_path
-  });
-});
+    navHighlight: "posts",
+    contentsPage: "postspage",
+    posts: postManager.getAll(),
+    postsPath: postsDir
+  } satisfies EjsRenderPostPageMeta)
+);
 
 app.get("/remote_testing", (_, res) => {
   res.render("testing/remote");
@@ -73,9 +52,9 @@ app.get("/remote_testing", (_, res) => {
 
 app.get("/home", (_, res) => {
   res.render("index", {
-    nav_highlight: "Home",
-    container_contents: "homepage"
-  });
+    navHighlight: "home",
+    contentsPage: "homepage"
+  } satisfies EjsRenderMeta);
 });
 
 app.post("/api/remote", async (req, res) => {

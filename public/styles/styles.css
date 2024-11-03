@@ -1,15 +1,14 @@
 /* Body Styles */
 body {
   font-family: Mulish, Helvetica, sans-serif, sans-serif;
-  background-color: #f0f0f0;
   margin: 0;
   padding: 0;
-  background: rgb(20, 120, 10);
   background: linear-gradient(
     30deg,
-    rgba(20, 120, 10, 0.49341743533350846) 34%,
+    rgba(20, 120, 10, 0.49341743533350846) 60%,
     rgba(0, 212, 255, 1) 100%
   );
+  overscroll-behavior: none;
 }
 
 /* Container Styles */
@@ -160,12 +159,19 @@ footer {
 .cv p {
   margin-top: 4px;
   padding-inline-start: 15px;
+  word-break: break-all;
 }
 
 .cv-block {
   width: 500px;
   flex-grow: 1;
   padding: 10px 0px;
+}
+
+@media (max-width: 480px) {
+  .cv-block {
+    width: 100%;
+  }
 }
 
 .cv-block ul {

@@ -21,23 +21,23 @@
 
   <nav class="top-nav">
     <ul>
-      <li><a href="/home" <% if (nav_highlight==='Home' ) {%>
+      <li><a href="/home" <% if (navHighlight == "home" ) {%>
           class='top-nav-selected'
           <% } %>
-            >Home
+            >Главная
         </a></li>
 
       <li>|</li>
-      <li><a href="/posts" <% if (nav_highlight==='Posts' ) {%>
+      <li><a href="/posts" <% if (navHighlight == "posts" ) {%>
           class='top-nav-selected'
           <% } %>
-            >Posts
+            >Новости
         </a></li>
     </ul>
   </nav>
 
   <div class="container">
-    <%- include(container_contents) -%>
+    <%- include(contentsPage) -%>
   </div>
 
   <footer>
