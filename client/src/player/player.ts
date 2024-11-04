@@ -1,18 +1,21 @@
 import { iconsPath } from "../routes.js";
+import { initMusicWidget, widgetOnPause, widgetOnPlay } from "./musicWidget.js";
 
-const placeholders = document.getElementsByClassName(
-  "music-player"
-) as HTMLCollectionOf<HTMLDivElement>;
+export const initPlayers = () => {
+  const placeholders = document.getElementsByClassName(
+    "music-player"
+  ) as HTMLCollectionOf<HTMLDivElement>;
+  for (const p of placeholders)
+    new MusicPlayer(p, {
+      onPlay: widgetOnPlay,
+      onPause: widgetOnPause
+    });
 
-const initPlayers = () => {
-  for (const p of placeholders) {
-    new MusicPlayer(p);
-  }
+  MusicPlayer.lastActivePlayer = MusicPlayer?.playersList?.[0];
+  initMusicWidget();
 };
 
-window.addEventListener("load", initPlayers);
-
-class MusicPlayer {
+export class MusicPlayer {
   static lastActivePlayer: MusicPlayer = null;
   static playersList: MusicPlayer[] = [];
   static loopAll = false;
@@ -29,6 +32,13 @@ class MusicPlayer {
   skipBackwardButton: HTMLButtonElement;
   audio: HTMLAudioElement;
   timestamp: HTMLParagraphElement;
+  coverImage: HTMLImageElement;
+
+  callbacks?: {
+    onPlay?: () => void;
+    onPause?: () => void;
+    onSkip?: (direction: "forwards" | "backwards") => void;
+  };
 
   play = () => {
     if (MusicPlayer.lastActivePlayer) MusicPlayer.lastActivePlayer.pause();
@@ -39,6 +49,7 @@ class MusicPlayer {
     );
     MusicPlayer.lastActivePlayer = this;
     this.isPlaying = true;
+    this.callbacks?.onPlay?.();
   };
 
   pause = () => {
@@ -49,6 +60,7 @@ class MusicPlayer {
     );
     MusicPlayer.lastActivePlayer = this;
     this.isPlaying = false;
+    this.callbacks?.onPause?.();
   };
 
   toggle = () => {
@@ -91,6 +103,7 @@ class MusicPlayer {
     nextPlayer.setTime(0);
     nextPlayer.play();
     this.scrollTo(nextPlayer.musicPlayer);
+    this.callbacks?.onSkip?.(direction);
   };
 
   scrollTo = (element: HTMLElement) => {
@@ -131,7 +144,15 @@ class MusicPlayer {
     });
   };
 
-  constructor(playerPlaceholder: HTMLDivElement) {
+  constructor(
+    playerPlaceholder: HTMLDivElement,
+    callbacks?: {
+      onPlay?: () => void;
+      onPause?: () => void;
+      onSkip?: (direction: "forwards" | "backwards") => void;
+    }
+  ) {
+    this.callbacks = callbacks;
     MusicPlayer.playersList.push(this);
 
     // getting div attributes
@@ -141,7 +162,7 @@ class MusicPlayer {
 
     // building and rendering player based on attributes
     const postPlayer = $(playerPlaceholder);
-    const coverImage = $(
+    const coverImage = $<HTMLImageElement>(
       `<img class="music-player-cover" src="${this.thumbnailPath}">`
     );
     postPlayer.append(coverImage);
@@ -183,6 +204,7 @@ class MusicPlayer {
     this.skipBackwardButton = skipBackwardButton[0];
     this.audio = audio[0];
     this.timestamp = timestamp[0];
+    this.coverImage = coverImage[0];
 
     // checking if the audio loaded
     let retries = 10;
