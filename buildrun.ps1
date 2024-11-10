@@ -1,4 +1,3 @@
-#!/bin/sh
 npm i -g typescript
 cd client
 npm i
