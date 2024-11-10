@@ -1,5 +1,5 @@
 #!/bin/sh
-npm i -g typescript
+npm i -g typescript@5.6.3
 cd client
 npm i
 tsc
