@@ -1,9 +1,15 @@
 {
   "posts": [
     {
+      "title": "Начало работы над Smashrooms2",
+      "datetime": "2024-12-30",
+      "tags": ["music", "art", "game"],
+      "pagename": "smashrooms2_start"
+    },
+    {
       "title": "Радость",
       "datetime": "2024-11-03",
-      "tags": ["music", "art", "cover"],
+      "tags": ["music", "art"],
       "pagename": "radost_song"
     },
     {
