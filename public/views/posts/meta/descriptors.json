@@ -1,6 +1,12 @@
 {
   "posts": [
     {
+      "title": "Забвение",
+      "datetime": "2024-01-19",
+      "tags": ["music", "art"],
+      "pagename": "zabvenie"
+    },
+    {
       "title": "Начало работы над Smashrooms2",
       "datetime": "2024-12-30",
       "tags": ["music", "art", "game"],
