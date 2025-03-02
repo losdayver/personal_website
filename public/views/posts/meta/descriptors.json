@@ -1,6 +1,12 @@
 {
   "posts": [
     {
+      "title": "Новые саундтреки для Smashrooms2!",
+      "datetime": "2024-03-02",
+      "tags": ["music", "art", "game"],
+      "pagename": "smashrooms2_new_soundtracks"
+    },
+    {
       "title": "Забвение",
       "datetime": "2024-01-19",
       "tags": ["music", "art"],
