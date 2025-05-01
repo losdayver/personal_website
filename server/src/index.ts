@@ -13,10 +13,11 @@ import {
   stylesRoute,
   viewsRoute,
   clientModulesDir,
-  postsDir
+  postsDir,
 } from "./routes";
 import { PostManager } from "./postManager/postManager";
 import { EjsRenderMeta, EjsRenderPostPageMeta } from "./types";
+import { initSockets } from "./api/remote/sockets";
 
 const app = express();
 
@@ -42,18 +43,14 @@ app.get("/posts", async (_, res) =>
     navHighlight: "posts",
     contentsPage: "postspage",
     posts: postManager.getAll(),
-    postsPath: postsDir
+    postsPath: postsDir,
   } satisfies EjsRenderPostPageMeta)
 );
-
-app.get("/remote_testing", (_, res) => {
-  res.render("testing/remote");
-});
 
 app.get("/home", (_, res) => {
   res.render("index", {
     navHighlight: "home",
-    contentsPage: "homepage"
+    contentsPage: "homepage",
   } satisfies EjsRenderMeta);
 });
 
@@ -65,3 +62,12 @@ app.post("/api/remote", async (req, res) => {
 app.listen(config.port, "0.0.0.0", () => {
   console.log(`Listening on port ${config.port}!`);
 });
+
+// temp routes
+app.get("/remote_testing", (_, res) => {
+  res.render("testing/remote");
+});
+app.get("/socket_testing", (_, res) => {
+  res.render("testing/sockets");
+});
+initSockets();
