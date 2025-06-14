@@ -9,11 +9,15 @@
     </div>
     <div class="personal-info">
       <h2>Олег Жмелев</h2>
-      <h2>22 года</h2>
+      <h2>
+        Возраст: <%- ((d = new Date(), b = new Date('2002-04-16')) =>
+        d.getFullYear() - b.getFullYear() - (d.getMonth() < b.getMonth() ||
+        (d.getMonth() === b.getMonth() && d.getDate() < b.getDate())))() -%>
+      </h2>
       <hr />
       <h4>Fullstack WEB Developer | GO developer</h4>
       <p>Английский: разговорный</p>
-      <p>Телефон: +7 906 087-22-30</p>
+      <p>Телефон: <a href="tel:+79060872230">+7 906 087-22-30</a></p>
       <p>Email: zhmelev.o@gmail.com</p>
       <p>
         Telegram:
@@ -46,6 +50,133 @@
       <div class="cv-block">
         <h3>Hard Skills</h3>
         <hr />
+
+        <!--JS/TS-->
+        <div class="cv-block-skill">
+          <div class="cv-block-skill-header">
+            <h4>JS / TypeScript</h4>
+            <img
+              class="cv-block-skill-logo"
+              src="../media/js_logo.png"
+              alt="JavaScript"
+            />
+            <img
+              class="cv-block-skill-logo"
+              src="../media/typescript_logo.png"
+              alt="TypeScript"
+            />
+          </div>
+          <div class="cv-block-skill-progressbar">
+            <div style="width: 85%">Профессиональный</div>
+          </div>
+          <h4>Кейсы разработки</h4>
+          <ul>
+            <li>
+              <p>
+                Разработка
+                <a href="https://www.medwork.ru/mwnext">МИС MNNext</a>в компании
+                MasterLab
+              </p>
+            </li>
+            <li>
+              <p>
+                Разработка многопользовательской игры
+                <a href="https://github.com/losdayver/smashrooms2"
+                  >smashrooms2</a
+                >
+              </p>
+            </li>
+            <li>
+              <p>
+                Разработка frontend'а и сервера приложения на NodeJS для
+                on-premesis системы мониторинга производительности
+                <a href="https://github.com/losdayver/server_metrics_analyser"
+                  >github.com/losdayver/server_metrics_analyser</a
+                >
+              </p>
+            </li>
+            <li>
+              <p>
+                Fullstack разработка приложения для автоматизации бизнес
+                процессов работы с ITSM системой компании АО "ЮниКредит Банк" на
+                NodeJS ExpressJS
+              </p>
+            </li>
+          </ul>
+          <h4>Также умею</h4>
+          <ul>
+            <li>
+              <p>Работать с фреймворками от jQuery до React</p>
+            </li>
+            <li>
+              <p>
+                Писать эффективные и продуманные Unit-тесты на Jest для
+                приложений NodeJS
+              </p>
+            </li>
+            <li>
+              <p>
+                Использовать весь функционал ES6, а также продвинутые
+                инструменты JavaScript
+              </p>
+            </li>
+            <li>
+              <p>
+                Использовать продвинутые инструменты работы с типами в
+                TypeScript
+              </p>
+            </li>
+          </ul>
+        </div>
+
+        <!--Верстка-->
+        <div class="cv-block-skill">
+          <div class="cv-block-skill-header">
+            <h4>HTML + CSS</h4>
+            <img
+              class="cv-block-skill-logo"
+              src="../media/html_logo.png"
+              alt="HTML"
+              style="width: 30px; height: 40px"
+            />
+            <img
+              class="cv-block-skill-logo"
+              src="../media/css_logo.png"
+              alt="CSS"
+              style="width: 30px; height: 40px"
+            />
+          </div>
+          <div class="cv-block-skill-progressbar">
+            <div style="width: 90%">Профессиональный</div>
+          </div>
+          <h4>Кейсы разработки</h4>
+          <ul>
+            <li>
+              <p>
+                Верстка веб-сайта
+                <a href="https://olegzhmelev.ru">olegzhmelev.ru</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Разработка frontend'а приложения для on-premesis системы
+                мониторинга производительности
+                <a href="https://github.com/losdayver/server_metrics_analyser"
+                  >github.com/losdayver/server_metrics_analyser</a
+                >
+              </p>
+            </li>
+          </ul>
+          <h4>Также умею</h4>
+          <ul>
+            <li>
+              <p>
+                Хорошо структурировать и комментировать HTML и CSS файлы для
+                дальнейшей поддержки сторонними разработчиками
+              </p>
+            </li>
+          </ul>
+        </div>
 
         <!--Golang-->
         <div class="cv-block-skill">
@@ -111,63 +242,6 @@
           </ul>
         </div>
 
-        <!--JS/TS-->
-        <div class="cv-block-skill">
-          <div class="cv-block-skill-header">
-            <h4>JS / TypeScript</h4>
-            <img
-              class="cv-block-skill-logo"
-              src="../media/js_logo.png"
-              alt="JavaScript"
-            />
-            <img
-              class="cv-block-skill-logo"
-              src="../media/typescript_logo.png"
-              alt="TypeScript"
-            />
-          </div>
-          <div class="cv-block-skill-progressbar">
-            <div style="width: 85%">Полупрофессиональный</div>
-          </div>
-          <h4>Кейсы разработки</h4>
-          <ul>
-            <li>
-              <p>
-                Разработка frontend'а и сервера приложения на NodeJS для
-                on-premesis системы мониторинга производительности
-                <a href="https://github.com/losdayver/server_metrics_analyser"
-                  >github.com/losdayver/server_metrics_analyser</a
-                >
-              </p>
-            </li>
-            <li>
-              <p>
-                Fullstack разработка приложения для автоматизации бизнес
-                процессов работы с ITSM системой компании АО "ЮниКредит Банк" на
-                NodeJS ExpressJS
-              </p>
-            </li>
-          </ul>
-          <h4>Также умею</h4>
-          <ul>
-            <li>
-              <p>Работать с jQuery и смежными фреймворками</p>
-            </li>
-            <li>
-              <p>
-                Писать эффективные и продуманные Unit-тесты на Jest для
-                приложений NodeJS
-              </p>
-            </li>
-            <li>
-              <p>
-                Использовать весь функционал ES6, а также продвинутые
-                инструменты JavaScript
-              </p>
-            </li>
-          </ul>
-        </div>
-
         <!--Python-->
         <div class="cv-block-skill">
           <div class="cv-block-skill-header">
@@ -223,58 +297,6 @@
           </ul>
         </div>
 
-        <!--Верстка-->
-        <div class="cv-block-skill">
-          <div class="cv-block-skill-header">
-            <h4>HTML + CSS</h4>
-            <img
-              class="cv-block-skill-logo"
-              src="../media/html_logo.png"
-              alt="HTML"
-              style="width: 30px; height: 40px"
-            />
-            <img
-              class="cv-block-skill-logo"
-              src="../media/css_logo.png"
-              alt="CSS"
-              style="width: 30px; height: 40px"
-            />
-          </div>
-          <div class="cv-block-skill-progressbar">
-            <div style="width: 70%">Продвинутый</div>
-          </div>
-          <h4>Кейсы разработки</h4>
-          <ul>
-            <li>
-              <p>
-                Верстка веб-сайта
-                <a href="https://olegzhmelev.ru">olegzhmelev.ru</a>
-              </p>
-            </li>
-            <li>
-              <p>
-                Разработка frontend'а и сервера приложения на NodeJS для
-                on-premesis системы мониторинга производительности
-                <a href="https://github.com/losdayver/server_metrics_analyser"
-                  >github.com/losdayver/server_metrics_analyser</a
-                >
-              </p>
-            </li>
-            <li>
-              <p>Создание приложений на фреймворке React</p>
-            </li>
-          </ul>
-          <h4>Также умею</h4>
-          <ul>
-            <li>
-              <p>
-                Хорошо структурировать и комментировать HTML и CSS файлы для
-                дальнейшей поддержки сторонними разработчиками
-              </p>
-            </li>
-          </ul>
-        </div>
-
         <!--C#-->
         <div class="cv-block-skill">
           <div class="cv-block-skill-header">
@@ -305,8 +327,7 @@
             </li>
           </ul>
         </div>
-      </div>
-      <div class="cv-block">
+
         <h3>Soft Skills</h3>
         <hr />
 
@@ -331,10 +352,12 @@
             подход в работе и проектах
           </p>
         </div>
-
+      </div>
+      <div class="cv-block">
         <h3>Опыт работы</h3>
         <hr />
 
+        <!-- Unicredit -->
         <div class="cv-block-skill">
           <div class="cv-block-skill-header">
             <h4>UniCredit Bank</h4>
@@ -351,7 +374,7 @@
             компонентов частного облака
           </p>
           <h4>Даты</h4>
-          <p>2022-02-01 — по настояшее время</p>
+          <p>2022 — 2024 гг.</p>
           <h4>Активности</h4>
           <ul>
             <li>
@@ -383,6 +406,33 @@
           </ul>
         </div>
 
+        <!-- MasterLab -->
+        <div class="cv-block-skill">
+          <div class="cv-block-skill-header">
+            <h4>MasterLab</h4>
+            <img
+              class="cv-block-skill-logo"
+              src="../media/masterlab-logo.png"
+              alt="Unicredit Bank"
+              style="width: 30px"
+            />
+          </div>
+          <h4>Позиция</h4>
+          <p>Разработчик МИС для клиник, госпиталей и ММЦ</p>
+          <h4>Даты</h4>
+          <p>2024 г. — по настояшее время</p>
+          <h4>Активности</h4>
+          <ul>
+            <li>
+              <p>
+                Fullstack Разработка
+                <a href="https://www.medwork.ru/mwnext">МИС MNNext</a>для
+                госпиталей и клиник
+              </p>
+            </li>
+          </ul>
+        </div>
+
         <h3>Также смотрите</h3>
         <hr />
 
@@ -402,6 +452,23 @@
             <a href="https://github.com/losdayver">github.com/losdayver</a>
           </p>
           <h4>Последние персональные проекты</h4>
+
+          <h3>Smashrooms2</h3>
+          <p>
+            Многопользовательская сетевая игра в стиле экшн-платформер с
+            собственным сетевым протоколом
+          </p>
+          <p>
+            Репозиторий:
+            <a href="https://github.com/losdayver/smashrooms2">
+              github.com/losdayver/smashrooms2</a
+            >
+          </p>
+          <div class="cv-block-skill-gallery">
+            <img src="../media/smashrooms2_first.png" alt="smashrooms2" />
+          </div>
+
+          <hr />
 
           <h3>Bash Trainer</h3>
           <p>
@@ -447,24 +514,6 @@
           <div class="cv-block-skill-gallery">
             <img src="../media/metrics_dashboard.png" alt="Metrics Analyser" />
             <img src="../media/metrics_report.png" alt="Metrics Analyser" />
-          </div>
-
-          <hr />
-
-          <h3>Smashrooms</h3>
-          <p>
-            Многопользовательская сетевая игра с собственным сетевым протоколом
-            прикладного уровня, построенная на сокетах
-          </p>
-          <p>
-            Репозиторий:
-            <a href="https://github.com/losdayver/Internet-Battle">
-              github.com/losdayver/Internet-Battle</a
-            >
-          </p>
-          <div class="cv-block-skill-gallery">
-            <img src="../media/internet_battle_1.png" alt="Internet-Battle" />
-            <img src="../media/internet_battle_2.png" alt="Internet-Battle" />
           </div>
 
           <hr />
